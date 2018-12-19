@@ -48,5 +48,29 @@ namespace CrudUtilityLib
                 return nombre.Value.ToString("### ### ### ### ##0.###");
             else return "Non Défini";
         }
+        /// <summary>
+        /// Extension function to reverse date string to fit date format (From fr culture to en or vice versa)
+        /// </summary>
+        /// <param name="dateString"></param>
+        /// <returns></returns>
+        public static string ReverseDateFormat(this string dateString)
+        {
+            string[] tableauString = new string[0];
+            if (dateString.Contains("-"))
+            {
+                tableauString = dateString.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            if (dateString.Contains("/"))
+            {
+                tableauString = dateString.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            if (tableauString.Length == 3)
+            {
+                if (tableauString[2].Length == 1) { tableauString[2] = "0" + tableauString[2]; }
+                if (tableauString[1].Length == 1) { tableauString[1] = "0" + tableauString[1]; }
+                return tableauString[2] + "-" + tableauString[1] + "-" + tableauString[0];
+            }
+            return dateString;
+        }
     }
 }
